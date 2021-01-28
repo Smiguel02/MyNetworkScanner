@@ -1,2 +1,2 @@
 # MyNektworkScanner
-Check devices and open ports connected to your nektork
+Check devices and open ports in my nektork
