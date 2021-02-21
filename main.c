@@ -34,6 +34,42 @@ char* StrHandler(char *ini, int* maxlen, char end)
 	return str;
 }
 
+char* getPackageManager()
+{
+	int DEBUG = 1;
+	FILE *fp;
+  	char line[130]="";
+	
+	fp = fopen("/etc/os-release", "r");
+
+	for(int i = 0; i < 7; i++) fgets( line, sizeof line, fp);
+
+	fclose(fp);
+
+	if (DEBUG) printf("line: %s", line);
+	
+	int ID_LIKE_Start = 8;
+	char* ID_LIKE = (char *)calloc (10 + 1, sizeof(char));
+	
+	int i = 0;
+	
+	while( line[ID_LIKE_Start + i] != '\0')
+	{
+		ID_LIKE[i] = line[ID_LIKE_Start + i];
+		i++;
+	}
+	
+	ID_LIKE[--i] = '\0';	
+	
+	printf("\nID_LIKE:|%s| \n\n", ID_LIKE);
+
+	if (strcmp("debian", ID_LIKE) == 0 ) printf("apt \n");
+
+
+
+	return NULL;
+}
+
 
 char* getIP()
 {
