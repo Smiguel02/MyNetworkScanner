@@ -1,4 +1,4 @@
 # MyNetworkScanner
-Check devices and open ports in local networks using NMAP in Linux
+Check devices connected in local networks and look for open ports using NMAP in Linux
 
-WARNING: Only install NMAP in Debian based Linux
+**WARNING**: Only install NMAP in Debian based Linux
