@@ -13,10 +13,12 @@ char* StrHandler(char *ini, int* maxlen, char end)
 	if(*maxlen < 1) return NULL;
 	
 	real_len = *maxlen;
+	
+	if(DEBUG) printf("Ini: |%c| \n", ini[0]);
 	if(DEBUG) printf("maxlen:|%d| \n", real_len);
 
 	while(real_len > -1 && ini[real_len] != end) real_len--;
-	if(DEBUG) printf("Debug:|%c|", ini[real_len+1]);
+	if(DEBUG) printf("Debug - Last char:|%c|\n", ini[real_len+1]);
 	while(real_len > -1 && ini[real_len] == end) real_len--;
 
 	real_len++;
@@ -36,7 +38,7 @@ char* StrHandler(char *ini, int* maxlen, char end)
 
 char* getPackageManager()
 {
-	int DEBUG = 1;
+	int DEBUG = 0;
 	FILE *fp;
   	char line[130]="";
 	
@@ -62,8 +64,8 @@ char* getPackageManager()
 	ID_LIKE[--i] = '\0';	
 	
 	printf("\nID_LIKE:|%s| \n\n", ID_LIKE);
-
-	if (strcmp("debian", ID_LIKE) == 0 ) printf("apt \n");
+	
+	if (strcmp("debian\0", ID_LIKE) == 0 ) if(DEBUG == 1) printf("apt \n");
 
 
 
@@ -90,7 +92,7 @@ char* getIP()
 	int inetStart = 13;
 
 	char *inet = StrHandler(line + inetStart, &IPv4len, ' ');
-	printf("\nYour IP address:|%s| \n\n", inet); //0x48B3D3
+	printf("\nYour IP address:|%s| \n\n", inet);
 
 	char *aux = StrHandler(inet, &IPv4len, '.');
 	if (DEBUG) printf("aux: %s \n", aux);
@@ -114,7 +116,9 @@ char* getIP()
 
 int main()
 {
-	int DEBUG = 0;
+	int DEBUG = 1;
+
+	getPackageManager();
 	
 
 	char option;
@@ -122,7 +126,7 @@ int main()
 
 	do
 	{
-		printf("Nmap requeired! Do you want to install it or upgrade it? \n");
+		printf("Nmap requeired! Do you want to install it or upgrade it? \n\n");
 		printf("Type 'i' to istall or upgrade it \n");
 		printf("Type 'c' to continue \n");
 		printf("Type 't' to leave \n\n");	
@@ -142,18 +146,22 @@ int main()
 	} while(option != 'c');
 
 	char *range = getIP();
-
-
 	printf("Range: %s \n", range);
 
-	char* cmd = (char *)calloc(strlen("sudo nmap -sn") + 1 + strlen(range) + 1, sizeof(char) );
-	sprintf(cmd, "%s %s", "sudo nmap -sn", range);
+	char cmd[] = "sudo nmap -sn";
+
+	char* Finalcmd = (char *)calloc(strlen(cmd) + 1 + strlen(range) + 1, sizeof(char) );
+
+	sprintf(Finalcmd, "%s %s", cmd, range);
+	//-sT: scan TCP
+	//-sn: ping scan - nao funciona localmente
+	//-O: Enable OS detection;  You need to use a scan type along with it, such as -sS, -sT, -sF, etc instead of -sn
 
 	free(range);
 
 	if(DEBUG == 1) puts(cmd);
 
-	system(cmd);
+	system(Finalcmd);
 
 
 	return 0;
