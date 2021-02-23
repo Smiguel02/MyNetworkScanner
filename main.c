@@ -66,6 +66,7 @@ char* getPackageManager()
 	printf("\nID_LIKE:|%s| \n\n", ID_LIKE);
 	
 	if (strcmp("debian\0", ID_LIKE) == 0 ) if(DEBUG == 1) printf("apt \n");
+	else if (strcmp("arch\0", ID_LIKE) == 0 ) if(DEBUG == 1) printf("pacman -S");
 
 
 
