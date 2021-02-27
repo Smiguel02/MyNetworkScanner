@@ -65,18 +65,22 @@ char* getPackageManager()
 	
 	printf("\nID_LIKE:|%s| \n\n", ID_LIKE);
 	
-	char* manager;
-	
 	if (strcmp("debian\0", ID_LIKE) == 0 )
 	{
-		manager = calloc(strlen("debian\0"), sizeof(char));
-		if(DEBUG == 1) printf("apt \n");
+		char manager[] = "apt\0";
+		if(DEBUG == 1) printf("apt\n");
+		return manager;
 	}
-	else if (strcmp("arch\0", ID_LIKE) == 0 ) if(DEBUG == 1) printf("pacman -S");
+
+	else if (strcmp("arch\0", ID_LIKE) == 0 )
+	{
+		char manager[] = "pacman -S\0";
+		if(DEBUG == 1) printf("pacman -S\0\n");
+		return manager;
+	}
 
 
-
-	return manager;
+	return NULL;
 }
 
 
