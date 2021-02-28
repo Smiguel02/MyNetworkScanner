@@ -87,7 +87,7 @@ char* getIP()
   	char line[130]="";
 
 
-	fp = popen("ifconfig", "r");	
+	fp = popen("ifconfig", "r"); //ip configuration	
 
   	for(int i = 0; i < 2; i++) fgets( line, sizeof line, fp);
 
