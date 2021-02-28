@@ -31,7 +31,7 @@ def getPackageManager():
 #------------------------------------------------------------
 
 
-#getIP()
+getIP()
 manager = getPackageManager()
 
 if manager == -1: print(Error)
