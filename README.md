@@ -1,8 +1,13 @@
 # MyNetworkScanner
 Check devices connected in local networks and look for open ports using NMAP in Linux.
-Nmap is currently set to use ping scan.
+
+# Features
+Use NMAP with ping scan.
+Install or update NMAP.
 
 # In progress
-Working OS detection and Arch based Linux.
+Working OS detection. 
+Install and update NMAP in other based Linux.
+Use ping scan without have install NMAP
 
-**WARNING**: Only install NMAP in Debian based Linux.
+**WARNING**: Currently, only install or update NMAP in Debian based Linux.
