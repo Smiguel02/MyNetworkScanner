@@ -3,8 +3,16 @@ import os
 def getIP():
     info = os.popen('ifconfig').read()
 
-    print(info)
+    firstDelPos=info.find("inet ") + 5
+    secondDelPos=info.find(" netmask") -1
 
+    inet = info[firstDelPos:secondDelPos]
+
+    print(info)
+    print(firstDelPos)
+    print(secondDelPos)
+
+    print("|",inet,"|")
 
 def getPackageManager():
 
