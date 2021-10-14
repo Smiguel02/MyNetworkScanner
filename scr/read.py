@@ -13,7 +13,8 @@ def getIP():
     print(secondDelPos)
 
     print("|",inet,"|")
-
+    
+//de facto isto é bue util
 def getPackageManager():
 
     mylines = []                             
